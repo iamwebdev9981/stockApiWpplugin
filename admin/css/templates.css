@@ -1,0 +1,61 @@
+/***
+ ------------------------------------------------------
+        Stock display template
+ ------------------------------------------------------
+ ***/
+
+.stock-display-page #search{
+border-radius: 5px;
+height: 40px;
+width: 250px;
+float: right;
+}
+
+.search_container_overlay{
+
+position: fixed;
+height: 100vh;
+width: 100%;
+top: 0px;
+left: 0px;
+background: rgba(0, 0, 0, 0.5);
+padding: 50px;
+}
+
+.search_container_overlay .container{
+ background: #fff;
+ padding: 20px 50px 15px;
+}
+
+.search_container_overlay .container a{
+	text-decoration: none;
+	color:rgba(0, 0, 0, 0.8);
+	font-size: 15px;
+	padding: 10px 10px;
+	margin: 10px;
+}
+
+.symbol-box{
+padding: 3px;
+}
+
+.close_btn{
+    padding: 1px 20px!important;
+	color: #fff!important;
+	background:#0dcaf0;
+	color: #fff;
+	border: 1px solid #0dcaf0;
+	margin-bottom: 10px;
+	margin-right: -10px;
+}
+.pagination{
+	margin-left: -20px;
+}
+
+.pagination a{
+	padding: 2px 10px!important;
+	color: #fff!important;
+	background:#0dcaf0;
+	color: #fff;
+	border: 1px solid #0dcaf0;
+}

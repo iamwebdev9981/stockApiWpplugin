@@ -1,0 +1,260 @@
+/* google fonts  */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+/*font-family: 'Noto Sans', sans-serif;*/
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+/* font-family: 'Anton', sans-serif;*/
+
+body{
+/*	font-family: 'Jost', sans-serif!important;*/
+/*font-family: 'Open Sans', sans-serif;*/
+}
+
+
+.active{
+	border-bottom: none!important;
+}
+
+.r-btn{
+	background: red!important;
+}
+/*Add sttock form */
+
+.add_stock_form form label {
+	font-size: 14px;
+	margin-bottom: 2px;
+}
+
+/* ----- Manage stock api page   ----- */
+
+.manage_stock_section table tr th{
+}
+
+.manage_stock_section table tr td{
+  font-size: 12px;
+}
+
+.manage_stock_section table tr .name_td{
+	white-space: nowrap; 
+  width: 150px; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.manage_stock_section {
+
+}
+
+.pagination a{
+	text-decoration: none;
+}
+
+.data-not-found .img-box{
+	height: 400px;
+	width: 400px;
+}
+
+.data-not-found .img-box img{
+	width: 100%;
+	height: 100%;
+}
+
+.data-not-found{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.data-not-found a{
+	text-decoration: none;
+	border: none!important;
+	outline: none ;
+	transition: all 0.3s;
+}
+
+.data-not-found a:active{
+		border: none!important;
+		outline: none!important ;
+}
+
+
+
+/* Custom Alerts Messages  */
+.custom-alert-danger{
+	color: #fff;
+	background: red;
+	padding: 10px 20px;
+	border-radius: 3px;
+	border: 1px solid #8c8f94;
+}
+
+.custom-alert-success{
+	color: #fff;
+	background: green;
+	padding: 10px 20px;
+	border-radius: 3px;
+  border: 1px solid #8c8f94;
+}
+
+.custom-alert-warning{
+	color: #000;
+	background: yellow;
+	padding: 10px 20px;
+	border-radius: 3px;
+  border: 1px solid #8c8f94;
+}
+
+
+/* -------------------- Dashboard page ------------------ */
+
+.dashboard_page{
+	background: white;
+}
+
+
+.pagination-box .pagination li{
+  margin: 2px;
+}
+
+.pagination-box .pagination a{
+	text-decoration: none;
+    border: 1px solid rgba(0,0,0,.125);
+    padding: 2px 8px 5px;
+    border-radius: 1px;
+    box-shadow: none!important;
+}
+
+#curve_chart g g text{
+    font-size: 10px!important;
+}
+
+.symbol-box {
+	border: 1px solid #2a262608;
+	padding: 0px;
+	padding: 3px 4px;
+}
+
+.symbol-box:hover{
+	background: #0bcd73;
+} 
+
+.symbol-box .title{
+	padding: 2px 20px 4px 20px;
+	font-weight: 600;
+	text-transform: uppercase;
+  text-decoration: none;
+  color:#2d4037bf;
+}
+
+.symbol-box .title:hover{
+  background: #0bcd73;
+  color: white;
+}
+
+
+.close_btn{
+	text-decoration: none;
+	color: #fff;
+	font-weight: 600;
+	margin-right: 30px;
+	padding: 5px 20px;
+	border-radius: 50px;
+	background: #0bcd73;
+}
+
+.close_btn:hover{
+	background: #0d6efd;
+	color: #fff;
+	-webkit-box-shadow: 0 8px 6px -13px #000;
+       -moz-box-shadow: 0 8px 6px -12px #000;
+            box-shadow: 0 8px 6px -12px #000;
+
+}
+
+.single_chart_title{
+	
+}
+
+.er_container{
+	width: 100%;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.er_container .close_btn{
+ margin-right: 0px;
+}
+
+.chart_btn_box{
+  margin-right: 40px;
+  padding-bottom: 2px;
+}
+
+.chart_btn_box button{
+	font-weight: 500;
+	background: #fff;
+	color: rgba(0,0,0, .524);
+  border: none;
+  padding: 2px 20px 2px 20px;
+  margin-right: 7px;
+  border-radius: 50px;
+  -webkit-box-shadow: 0px 0px 2px 1px rgba(0,0,0, .124);
+  -moz-box-shadow: 0px 0px 2px 1px rgba(0,0,0, .124);
+  box-shadow: 0px 0px 2px 1px rgba(0,0,0, .124);
+}
+
+
+/*  search container design start  */
+.search_container{
+background: #00000003;
+box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, .125);
+padding: 0px 50px 20px 50px!important;
+}
+
+.search_container a{
+	color: #333!important;
+	padding: 5px 0px!important;
+}
+
+.search_container .symbol-box{
+	text-align: center;
+	border: 1px solid rgba(0, 0, 0, .125);
+	padding: 10px;
+}
+
+.search_container .pagination li a{
+	padding: 3px 9px!important ;
+	color: #fff!important;
+	background: #2196f3!important;
+	text-shadow: 0px 0px 3px rgba(0, 0, 0, .3);
+}
+
+.search_container .pagination li a:hover{
+	background: #fff!important;
+	color: #2196f3!important;
+	border: 1px solid #2196f3;
+	text-shadow: 0px 0px 3px rgba(0, 0, 0, .1);
+}
+
+.search_container .close_btn{
+	margin: 10px;
+	border: none;
+	background: transparent;
+	color: #000;
+}
+.search_container .close_btn .fa-xmark{
+	font-size: 20px;
+
+}
+
+.title-desc{
+	font-weight: 700;
+}
+
+.title-h{
+	color:#0bcd73;
+}
