@@ -25,6 +25,11 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<!-- Added Jquery cdn file -->
 	<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.6/css/highcharts.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.6/js/highstock.js"></script>
+
 </head>
 <body>
 
@@ -67,104 +72,7 @@
   </div>
 </nav>
 
-
-<!-- <div class="container-fluid p-4">
-<div class="row mt-5">
-<div class="col-sm-12 col-lg-9 col-md-9 ">
-<div class="border rounded border-light shadow-sm p-3">
-<?php 
-
-
-// Set the URL for the Yahoo Finance API
-//$url = '';
-
-// Initialize cURL
-$ch = curl_init();
-
-// Set the cURL options
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-// Execute the cURL request
-$response = curl_exec($ch);
-
-// Decode the JSON response
-$data = json_decode($response, true);
-
-// Get the candlestick data
-$timestamps = $data['chart']['result'][0]['timestamp'];
-$openPrices = $data['chart']['result'][0]['indicators']['quote'][0]['open'];
-$highPrices = $data['chart']['result'][0]['indicators']['quote'][0]['high'];
-$lowPrices = $data['chart']['result'][0]['indicators']['quote'][0]['low'];
-$closePrices = $data['chart']['result'][0]['indicators']['quote'][0]['close'];
-
-// Format the data for Highcharts
-$candlestickData = array();
-for ($i = 0; $i < count($timestamps); $i++) {
-    $timestamp = $timestamps[$i];
-    $openPrice = $openPrices[$i];
-    $highPrice = $highPrices[$i];
-    $lowPrice = $lowPrices[$i];
-    $closePrice = $closePrices[$i];
-    $candlestickData[] = array($timestamp * 1000, $openPrice, $highPrice, $lowPrice, $closePrice);
-}
-
-// Generate the candlestick chart using Highcharts
-echo '<html>';
-echo '<head>';
-// echo '<script src="https://code.highcharts.com/highcharts.js"></script>';
-// echo '<script src="https://code.highcharts.com/modules/exporting.js"></script>';
-// echo '<script src="https://code.highcharts.com/modules/export-data.js"></script>';
-
-echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.6/css/highcharts.css" />';
-echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>';
-echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.6/js/highstock.js"></script>';
-
-echo '</head>';
-echo '<body>';
-echo '<div id="container"></div>';
-echo '<script>';
-echo 'Highcharts.stockChart("container", {
-    rangeSelector: {
-        selected: 1
-    },
-    title: {
-        text: "'. $res->symbol.' Historical Price"
-    },
-    yAxis: {
-        labels: {
-            formatter: function () {
-                return "$" + this.value;
-            }
-        }
-    },
-    series: [{
-        type: "candlestick",
-        name: "'.$res->symbol.'",
-        data: ' . json_encode($candlestickData) . ',
-        tooltip: {
-            valueDecimals: 2
-        }
-    }]
-});';
-echo '</script>';
-echo '</body>';
-echo '</html>';
-
-
-?>
-</div>			
-</div>
-
-		<div class="col-sm-12 col-lg-3 col-md-3">
-			<div class="border rounded border-light shadow-sm p-3">
-				
-			</div>
-		</div>
-	</div>
-</div> -->
-
-<div class="" id="result"></div>
+<div class="" id="result2"></div>
 
 <script> 
       $(document).ready(function() {
@@ -178,8 +86,8 @@ echo '</html>';
             data: {
               search: searchTerm
             },
-            success: function(data) {
-              $("#result").html(data);
+            success: function(searchData) {
+              $("#result2").html(searchData);
               //alert(data);
                 
             }
@@ -187,6 +95,142 @@ echo '</html>';
         });
       });
     </script>
+
+<!--  -->
+    <div class="container-fluid pt-4">
+    	<div class="row">
+    		<div class="col-sm-12 col-lg-3 col-md-3">
+    			<div class="chart-box  shadow-sm rounded p-4">
+    				<div class="" id="dis-chart-1f"></div>
+    				<div class="" id="dis-chart-1"></div>
+    			</div>
+    		</div>
+    		<div class="col-sm-12 col-lg-3 col-md-3">
+    			<div class="chart-box shadow-sm rounded p-4">
+    				<div class="" id="dis-chart-2f"></div>
+    				<div class="" id="dis-chart-2"></div>
+    			</div>
+    		</div>
+    		<div class="col-sm-12 col-lg-3 col-md-3">
+    			<div class="chart-box shadow-sm rounded p-4">
+                    <div class="" id="dis-chart-3f"></div>
+                    <div class="" id="dis-chart-3"></div>
+    			</div>
+    		</div>
+    		<div class="col-sm-12 col-lg-3 col-md-3">
+    			<div class="chart-box shadow-sm rounded p-4">
+    				<div class="" id="dis-chart-4f"></div>
+    				<div class="" id="dis-chart-4"></div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+    <script>
+    	$(document).ready(function(){
+     
+      $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_chart_1.php'; ?>",
+		      data:{cahart_status:1},
+		      success:function(resp1)
+		      {
+		          $("#dis-chart-1").html(resp1);
+		          $("#dis-chart-1f").css({"display":"none"});
+		      }
+		    });
+
+      $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_chart_2.php'; ?>",
+		      data:{cahart_status:1},
+		      success:function(resp1)
+		      {
+		          $("#dis-chart-2").html(resp1);
+		          $("#dis-chart-2f").css({"display":"none"});
+		      }
+		    });
+
+      $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_chart_3.php'; ?>",
+		      data:{cahart_status:1},
+		      success:function(resp1)
+		      {
+		          $("#dis-chart-3").html(resp1);
+		          $("#dis-chart-3f").css({"display":"none"});
+		      }
+		    });
+
+      $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_chart_4.php'; ?>",
+		      data:{cahart_status:1},
+		      success:function(resp1)
+		      {
+		          $("#dis-chart-4").html(resp1);
+		          $("#dis-chart-4f").css({"display":"none"});
+		      }
+		    });
+ 
+		setInterval(function()
+		{ 
+		    $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_chart_1.php'; ?>",
+		      datatype:"html",
+		      success:function(resp1)
+		      {
+		          $("#dis-chart-1").html(resp1);
+		          $("#dis-chart-1f").css({"display":"none"});
+		      }
+		    });
+		}, 60000);//time in milliseconds 
+
+
+		setInterval(function()
+		{ 
+		    $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_chart_2.php'; ?>",
+		      datatype:"html",
+		      success:function(resp2)
+		      {
+		          $("#dis-chart-2").html(resp2);
+		      }
+		    });
+		}, 60000);//time in milliseconds 
+
+		setInterval(function()
+		{ 
+		    $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_chart_3.php'; ?>",
+		      datatype:"html",
+		      success:function(resp3)
+		      {
+		          $("#dis-chart-3").html(resp3);
+		      }
+		    });
+		}, 60000);//time in milliseconds 
+
+		setInterval(function()
+		{ 
+		    $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_chart_4.php'; ?>",
+		      datatype:"html",
+		      success:function(resp4)
+		      {
+		          $("#dis-chart-4").html(resp4);
+		      }
+		    });
+		}, 60000);//time in milliseconds 
+
+    	});
+    </script>
+
+
 	
 </body>
 </html>

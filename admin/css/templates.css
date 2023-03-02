@@ -20,6 +20,7 @@ top: 0px;
 left: 0px;
 background: rgba(0, 0, 0, 0.5);
 padding: 50px;
+z-index: 1000;
 }
 
 .search_container_overlay .container{
@@ -57,5 +58,23 @@ padding: 3px;
 	color: #fff!important;
 	background:#0dcaf0;
 	color: #fff;
-	border: 1px solid #0dcaf0;
+	border: 1px solid #0dcaf0; 
+}
+
+tspan{
+	font-size: 12px;
+}
+
+.highcharts-navigator{
+  display: none;
+}
+
+.highcharts-series{
+ 
+}
+
+.highcharts-navigator-series {
+    fill: #e92898!important;
+    stroke: #c15921!important;
+/*    display:none;*/
 }

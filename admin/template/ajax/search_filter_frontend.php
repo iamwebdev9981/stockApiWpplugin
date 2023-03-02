@@ -1,6 +1,6 @@
 <?php 
 require_once('../../../../../../wp-config.php');
-include('header.php');
+
 
   global $wpdb,$table_prefix;
   $wp_stock_overview = $table_prefix.'stock_overview';
