@@ -98,40 +98,40 @@
       });
     </script>
 
-    <div class="container-fluid mb-5 mt-3">
+    <div class="container-fluid mb-2 mt-3 ">
     	<div class="row">
     		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
-    			<div class="nft-box border rounded-0 p-2 border-light shadow-sm">
+    			<div class="nft-box ">
     				<span id="nifty_value1"></span>
     				<span id="nifty_value"></span>
     			</div>
     		</div>
     		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
-    			<div class="nft-box border rounded-0 p-2 border-light shadow-sm">
+    			<div class="nft-box ">
     				<span id="sensex_value1"></span>
     				<span id="sensex_value"></span>
     			</div>
     		</div>
     		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
-    			<div class="nft-box border rounded-0 p-2 border-light shadow-sm">
+    			<div class="nft-box ">
     				<span id="banknifty_value1"></span>
     				<span id="banknifty_value"></span>
     			</div>
     		</div>
     		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
-    			<div class="nft-box border rounded-0 p-2 border-light shadow-sm">
+    			<div class="nft-box ">
     				<span id="nifty100_value1"></span>
     				<span id="nifty100_value"></span>
     			</div>
     		</div>
     		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
-    			<div class="nft-box border rounded-0 p-2 border-light shadow-sm">
+    			<div class="nft-box ">
     				<span id="niftyIT_value1"></span>
     				<span id="niftyIT_value"></span>
     			</div>
     		</div>
     		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
-    			<div class="nft-box border rounded-0 p-2 border-light shadow-sm">
+    			<div class="nft-box ">
     				<span id="niftyPharma_value1"></span>
     				<span id="niftyPharma_value"></span>
     			</div>
@@ -141,7 +141,7 @@
 
 <!--  -->
     <div class="container-fluid pt-2">
-    	<div class="row">
+    	<div class="row top-chart-row">
     		<div class="col-sm-12 col-lg-2 col-md-2">
     			<div class="chart-box">
     				<div class="" id="dis-chart-1f"></div>
@@ -336,10 +336,10 @@
     </script>
 
 
-<div class="container-fluid mt-5">
-	<div class="row mb-5">
+<div class="container-fluid">
+	<div class="row top-chart-row">
 		<div class="col-sm-12 col-lg-6 col-md-6 ">
-		  <div class="shadow-sm border rounded p-4 p-0">
+		  <div class=" ">
 		  	<h5 class="text-info mt-2">Nifty in INR</h5><hr>
 
 	      <div class="" id="nfty-chart-1f"></div>
@@ -569,37 +569,11 @@
 });
 </script>
 
-
-
 	
 </body>
 </html>
 
 
 
-
-<?php
-// $url = "https://query1.finance.yahoo.com/v7/finance/chart/^BSESN?range=1d&interval=1m";
-// $data = file_get_contents($url);
-// $json = json_decode($data, true);
-
-// $current_price = $json['chart']['result'][0]['meta']['regularMarketPrice'];
-// $change = $json['chart']['result'][0]['meta']['regularMarketChange'];
-// $percent_change = $json['chart']['result'][0]['meta']['regularMarketChangePercent'];
-
-// if ($change > 0) {
-//   $change_indicator = "+";
-//   $trend_indicator = "📈";
-// } elseif ($change < 0) {
-//   $change_indicator = "";
-//   $trend_indicator = "📉";
-// } else {
-//   $change_indicator = "";
-//   $trend_indicator = "🔷";
-// }
-
-// echo "Sensex Live Value: " . $current_price . "\n";
-// echo "Change: " . $change_indicator . $change . " (" . $percent_change . "%) " . $trend_indicator . "\n";
-?>
 
 

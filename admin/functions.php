@@ -61,43 +61,6 @@ function __getRowData($table,$id){
 
  function __getLiveNifty($url,$symbol){
 
-// $symbol = "^NSEI"; // Nifty symbol
-// $url = "https://query1.finance.yahoo.com/v7/finance/chart/$symbol?range=1d&interval=1m"; // API URL
-
-// $curl = curl_init();
-// curl_setopt_array($curl, array(
-//   CURLOPT_URL => $url,
-//   CURLOPT_RETURNTRANSFER => true,
-//   CURLOPT_FOLLOWLOCATION => true,
-//   CURLOPT_SSL_VERIFYPEER => false,
-// ));
-// $response = curl_exec($curl);
-// curl_close($curl);
-
-// // Parse JSON response
-// $data = json_decode($response, true);
-// $timestamp = $data['chart']['result'][0]['timestamp'];
-// $prices = $data['chart']['result'][0]['indicators']['quote'][0]['close'];
-// $live_prices = $data['chart']['result'][0]['meta']['regularMarketPrice'];
-
-
-// return $live_prices;
-//$url = "https://query1.finance.yahoo.com/v7/finance/chart/^NSEI?range=1d&interval=1m";
-// $data = file_get_contents($url);
-// $json = json_decode($data, true);
-
-// $current_price = $json['chart']['result'][0]['meta']['regularMarketPrice'];
-// $change = $json['chart']['result'][0]['meta']['regularMarketChange'];
-// $percent_change = $json['chart']['result'][0]['meta']['regularMarketChangePercent'];
-
-// if ($change > 0) {
-//   $change_indicator = "+";
-// } else {
-//   $change_indicator = "";
-// }
-
-// echo "Nifty 50 : " . $current_price . "\n ";
-// echo "Change: " . $change_indicator . $change . " (" . $percent_change . "%)\n";
 
  // $url = "https://query1.finance.yahoo.com/v7/finance/chart/^NSEI?range=1d&interval=1m";
 $data = file_get_contents($url);
@@ -118,7 +81,7 @@ if ($change > 0) {
   $trend_indicator = "🔷";
 }
 
-echo "<span>Nifty 50 : " . $current_price . "</span><br>";
+echo "<span>Nifty 50 : </span><span>" . $current_price . "</span><br>";
 echo "<span>Change : " . $change_indicator . $change . " (" . $percent_change . "%) " . $trend_indicator . "</span>";
 
  }
@@ -151,7 +114,7 @@ if ($change > 0) {
   $trend_indicator = "🔷";
 }
 
-echo "<span>Sensex : " . $current_price . "</span></br>";
+echo "<span>Sensex : </span><span>" . $current_price . "</span></br>";
 echo "<span>Change : " . $change_indicator . $change . " (" . $percent_change . "%) " . $trend_indicator . "</span>";
 
 
@@ -185,7 +148,7 @@ if ($change > 0) {
   $trend_indicator = "🔷";
 }
 
-echo "<span>Nifty 100 : " . $current_price . "</span><br>";
+echo "<span>Nifty 100 : </span><span>" . $current_price . "</span><br>";
 echo "<span>Change: " . $change_indicator . $change . " (" . $percent_change . "%) " . $trend_indicator . "</span>";
 
  }
@@ -218,7 +181,7 @@ if ($change > 0) {
   $trend_indicator = "🔷";
 }
 
-echo "<span>Bank Nifty: " . $current_price . "</span></br>";
+echo "<span>Bank Nifty: </span><span>" . $current_price . "</span></br>";
 echo "<span>Change: " . $change_indicator . $change . " (" . $percent_change . "%) " . $trend_indicator . "</span>";
 
  }
@@ -251,7 +214,7 @@ if ($change > 0) {
   $trend_indicator = "🔷";
 }
 
-echo "<span>Nifty IT : " . $current_price . "</span><br>";
+echo "<span>Nifty IT : </span><span>" . $current_price . "</span><br>";
 echo "<span>Change: " . $change_indicator . $change . " (" . $percent_change . "%) " . $trend_indicator . "</span>";
 
 
@@ -290,7 +253,7 @@ if ($current_value > $previous_value) {
 $current_value_f =  number_format($current_value,2);
 
 // Output the results
-echo "Nifty Pharma: $current_value_f ($indicator$percentage_change%)";
+echo "<span>Nifty Pharma: </span><span>$current_value_f($indicator$percentage_change%)</span>";
 
  }
 
@@ -358,7 +321,7 @@ $optionsJson = json_encode($options);
 $chartScript = "Highcharts.chart('chart-container', $optionsJson);";
 
 // Display chart
-echo "<div id='chart-container' style='width: 100%; height: 400px;'></div>";
+echo "<div id='chart-container' style='width: 100%; height: 300px;'></div>";
 echo "<script>$chartScript</script>";
 
 }
