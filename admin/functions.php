@@ -7,33 +7,362 @@
  ---------------------------------------------------
  ***/
 
+function __getTableData($table){
+  if($table){
+    global $wpdb,$table_prefix;
+    $wp_stock_overview = $table_prefix.$table;
+    $result = $wpdb->get_results("SELECT * FROM $wp_stock_overview");
 
- function __getData(){
+    if($result){
+      return $result;
+    }else{
+     echo "Data Not Found.";
+    }
+    }else{
+    echo "Enter your table name";
+  }  
+}
+
+
+/***
+ ---------------------------------------------------
+     GET ROW DATA  
+ ---------------------------------------------------
+ ***/
+
+
+function __getRowData($table,$id){
+  if($table){
+    if($id){
+      global $wpdb,$table_prefix;
+      $wp_stock_overview = $table_prefix.$table;
+      $result = $wpdb->get_row("SELECT * FROM $wp_stock_overview where id=".$id." ");
+
+      if($result){
+        return $result;
+      }else{
+       echo "Data Not Found.";
+      }
+    }else{
+      echo "Please Enter Your Id Here.";
+    }
+  }else{
+    echo "Please Enter Your Table Name.";
+  }  
+}
+
+
+
+/***
+ ---------------------------------------------------
+     GET NIFTY VALUE LIVE 
+ ---------------------------------------------------
+ ***/
+
+ function __getLiveNifty($url,$symbol){
+
+// $symbol = "^NSEI"; // Nifty symbol
+// $url = "https://query1.finance.yahoo.com/v7/finance/chart/$symbol?range=1d&interval=1m"; // API URL
+
+// $curl = curl_init();
+// curl_setopt_array($curl, array(
+//   CURLOPT_URL => $url,
+//   CURLOPT_RETURNTRANSFER => true,
+//   CURLOPT_FOLLOWLOCATION => true,
+//   CURLOPT_SSL_VERIFYPEER => false,
+// ));
+// $response = curl_exec($curl);
+// curl_close($curl);
+
+// // Parse JSON response
+// $data = json_decode($response, true);
+// $timestamp = $data['chart']['result'][0]['timestamp'];
+// $prices = $data['chart']['result'][0]['indicators']['quote'][0]['close'];
+// $live_prices = $data['chart']['result'][0]['meta']['regularMarketPrice'];
+
+
+// return $live_prices;
+//$url = "https://query1.finance.yahoo.com/v7/finance/chart/^NSEI?range=1d&interval=1m";
+// $data = file_get_contents($url);
+// $json = json_decode($data, true);
+
+// $current_price = $json['chart']['result'][0]['meta']['regularMarketPrice'];
+// $change = $json['chart']['result'][0]['meta']['regularMarketChange'];
+// $percent_change = $json['chart']['result'][0]['meta']['regularMarketChangePercent'];
+
+// if ($change > 0) {
+//   $change_indicator = "+";
+// } else {
+//   $change_indicator = "";
+// }
+
+// echo "Nifty 50 : " . $current_price . "\n ";
+// echo "Change: " . $change_indicator . $change . " (" . $percent_change . "%)\n";
+
+ // $url = "https://query1.finance.yahoo.com/v7/finance/chart/^NSEI?range=1d&interval=1m";
+$data = file_get_contents($url);
+$json = json_decode($data, true);
+
+$current_price = $json['chart']['result'][0]['meta']['regularMarketPrice'];
+$change = $json['chart']['result'][0]['meta']['regularMarketChange'];
+$percent_change = $json['chart']['result'][0]['meta']['regularMarketChangePercent'];
+
+if ($change > 0) {
+  $change_indicator = "+";
+  $trend_indicator = "📈";
+} elseif ($change < 0) {
+  $change_indicator = "";
+  $trend_indicator = "📉";
+} else {
+  $change_indicator = "";
+  $trend_indicator = "🔷";
+}
+
+echo "<span>Nifty 50 : " . $current_price . "</span><br>";
+echo "<span>Change : " . $change_indicator . $change . " (" . $percent_change . "%) " . $trend_indicator . "</span>";
 
  }
 
 
  /***
  ---------------------------------------------------
-     GET ROW DATA  
+     GET SENSEX VALUE LIVE 
  ---------------------------------------------------
  ***/
 
- function __getRowData($table_name,$id){
+ function __getLiveSensex($url,$symbol){
 
-  global $wpdb,$table_prefix;
-  $wp_stock_overview = $table_prefix.$table_name;
+//$url = "https://query1.finance.yahoo.com/v7/finance/chart/^BSESN?range=1d&interval=1m";
+$data = file_get_contents($url);
+$json = json_decode($data, true);
 
-  $result = $wpdb->get_row("SELECT * FROM $wp_stock_overview WHERE id='".$stock_id."' ");
-  if($res){
-  	return $result;
-  }else{
-  	$query_msg = "Data Not Found.";
-  	return $query_msg;
-  }
+$current_price = $json['chart']['result'][0]['meta']['regularMarketPrice'];
+$change = $json['chart']['result'][0]['meta']['regularMarketChange'];
+$percent_change = $json['chart']['result'][0]['meta']['regularMarketChangePercent'];
+
+if ($change > 0) {
+  $change_indicator = "+";
+  $trend_indicator = "📈";
+} elseif ($change < 0) {
+  $change_indicator = "";
+  $trend_indicator = "📉";
+} else {
+  $change_indicator = "";
+  $trend_indicator = "🔷";
+}
+
+echo "<span>Sensex : " . $current_price . "</span></br>";
+echo "<span>Change : " . $change_indicator . $change . " (" . $percent_change . "%) " . $trend_indicator . "</span>";
 
 
  }
+
+
+   /***
+ ---------------------------------------------------
+     GET NIFTY 100 VALUE LIVE 
+ ---------------------------------------------------
+ ***/
+
+ function __getNifty100($url,$symbol){
+
+//$url = "https://query1.finance.yahoo.com/v7/finance/chart/^NSEI?range=1d&interval=1m";
+$data = file_get_contents($url);
+$json = json_decode($data, true);
+
+$current_price = $json['chart']['result'][0]['meta']['regularMarketPrice'];
+$change = $json['chart']['result'][0]['meta']['regularMarketChange'];
+$percent_change = $json['chart']['result'][0]['meta']['regularMarketChangePercent'];
+
+if ($change > 0) {
+  $change_indicator = "+";
+  $trend_indicator = "📈";
+} elseif ($change < 0) {
+  $change_indicator = "";
+  $trend_indicator = "📉";
+} else {
+  $change_indicator = "";
+  $trend_indicator = "🔷";
+}
+
+echo "<span>Nifty 100 : " . $current_price . "</span><br>";
+echo "<span>Change: " . $change_indicator . $change . " (" . $percent_change . "%) " . $trend_indicator . "</span>";
+
+ }
+
+
+  /***
+ ---------------------------------------------------
+     GET BANK NIFTY VALUE LIVE 
+ ---------------------------------------------------
+ ***/
+
+ function __getBankNifty($url,$symbol){
+
+//$url = "https://query1.finance.yahoo.com/v7/finance/chart/^NSEBANK?range=1d&interval=1m";
+$data = file_get_contents($url);
+$json = json_decode($data, true);
+
+$current_price = $json['chart']['result'][0]['meta']['regularMarketPrice'];
+$change = $json['chart']['result'][0]['meta']['regularMarketChange'];
+$percent_change = $json['chart']['result'][0]['meta']['regularMarketChangePercent'];
+
+if ($change > 0) {
+  $change_indicator = "+";
+  $trend_indicator = "📈";
+} elseif ($change < 0) {
+  $change_indicator = "";
+  $trend_indicator = "📉";
+} else {
+  $change_indicator = "";
+  $trend_indicator = "🔷";
+}
+
+echo "<span>Bank Nifty: " . $current_price . "</span></br>";
+echo "<span>Change: " . $change_indicator . $change . " (" . $percent_change . "%) " . $trend_indicator . "</span>";
+
+ }
+
+
+/***
+ ---------------------------------------------------
+     GET NIFTY IT VALUE LIVE 
+ ---------------------------------------------------
+ ***/
+
+ function __getNiftyIT($url,$symbol){
+
+//$url = "https://query1.finance.yahoo.com/v7/finance/chart/^NIFTYIT?range=1d&interval=1m";
+$data = file_get_contents($url);
+$json = json_decode($data, true);
+
+$current_price = $json['chart']['result'][0]['meta']['regularMarketPrice'];
+$change = $json['chart']['result'][0]['meta']['regularMarketChange'];
+$percent_change = $json['chart']['result'][0]['meta']['regularMarketChangePercent'];
+
+if ($change > 0) {
+  $change_indicator = "+";
+  $trend_indicator = "📈";
+} elseif ($change < 0) {
+  $change_indicator = "";
+  $trend_indicator = "📉";
+} else {
+  $change_indicator = "";
+  $trend_indicator = "🔷";
+}
+
+echo "<span>Nifty IT : " . $current_price . "</span><br>";
+echo "<span>Change: " . $change_indicator . $change . " (" . $percent_change . "%) " . $trend_indicator . "</span>";
+
+
+ }
+
+
+ /***
+ ---------------------------------------------------
+     GET NIFTY PHARMA VALUE LIVE 
+ ---------------------------------------------------
+ ***/
+
+ function __getNiftyPharma($url,$symbol){
+
+//$symbol = "^CNXPHARMA"; // The symbol for Nifty Pharma index
+//$url = "https://query1.finance.yahoo.com/v7/finance/chart/$symbol?range=1d&interval=1m";
+
+$json = file_get_contents($url);
+$data = json_decode($json, true);
+
+// Get the current value and previous value of the index
+$current_value = end($data['chart']['result'][0]['indicators']['quote'][0]['close']);
+$previous_value = prev($data['chart']['result'][0]['indicators']['quote'][0]['close']);
+
+// Calculate the percentage change
+$percentage_change = round((($current_value - $previous_value) / $previous_value) * 100, 2);
+
+// Check if the value has increased or decreased
+$indicator = '';
+if ($current_value > $previous_value) {
+    $indicator = '↑';
+} else if ($current_value < $previous_value) {
+    $indicator = '↓';
+}
+
+$current_value_f =  number_format($current_value,2);
+
+// Output the results
+echo "Nifty Pharma: $current_value_f ($indicator$percentage_change%)";
+
+ }
+
+
+ /***
+ ---------------------------------------------------
+     GET NIFTY DATA WITH HIGHCHART
+ ---------------------------------------------------
+ ***/
+
+function ___showNiftyChart($url,$symbol){
+
+//$symbol = "^NSEI"; // Nifty symbol
+//url = "https://query1.finance.yahoo.com/v7/finance/chart/$symbol?range=1d&interval=1m"; // API URL
+
+// Make API request
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $url,
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_SSL_VERIFYPEER => false,
+));
+$response = curl_exec($curl);
+curl_close($curl);
+
+// Parse JSON response
+$data = json_decode($response, true);
+$timestamp = $data['chart']['result'][0]['timestamp'];
+$prices = $data['chart']['result'][0]['indicators']['quote'][0]['close'];
+
+// Generate chart data
+$rows = array();
+foreach ($timestamp as $key => $value) {
+  $date = date('Y-m-d H:i:s', $value);
+  $rows[] = array($value * 1000, $prices[$key]);
+}
+
+// Generate chart options
+$options = array(
+  'chart' => array(
+    'type' => 'line',
+  ),
+  'title' => array(
+    'text' => $symbol.' Nifty Stock Price',
+  ),
+  'xAxis' => array(
+    'type' => 'datetime',
+  ),
+  'yAxis' => array(
+    'title' => array(
+      'text' => 'Price (INR)',
+    ),
+  ),
+  'series' => array(
+    array(
+      'name' => 'Price',
+      'data' => $rows,
+    ),
+  ),
+);
+
+// Generate chart script
+$optionsJson = json_encode($options);
+$chartScript = "Highcharts.chart('chart-container', $optionsJson);";
+
+// Display chart
+echo "<div id='chart-container' style='width: 100%; height: 400px;'></div>";
+echo "<script>$chartScript</script>";
+
+}
+
 
 
 
@@ -43,7 +372,7 @@
  ---------------------------------------------------
  ***/
 
-function __showChart($url,$symbol,$chartType,$chart_id){
+function __showChart($url,$symbol,$name,$chartType,$chart_id){
 
 // Initialize cURL
 $ch = curl_init();
@@ -81,10 +410,10 @@ echo '<div id="container'.$chart_id.'"></div>';
 echo '<script>';
 echo 'Highcharts.stockChart("container'.$chart_id.'", {
     rangeSelector: {
-        selected: 5
+        selected: 6
     },
     title: {
-        text: "'. $symbol.' Chart"
+        text: "'. $symbol.'"
     },
 
     yAxis: {
@@ -98,7 +427,6 @@ echo 'Highcharts.stockChart("container'.$chart_id.'", {
 
     series: [{
         type: "'.$chartType.'",
-        color:"red",
         name: "'.$symbol.'",
         data: ' . json_encode($candlestickData) . ',
         tooltip: {
@@ -109,6 +437,14 @@ echo 'Highcharts.stockChart("container'.$chart_id.'", {
 echo '</script>';
 
 }
+
+
+
+/***
+ ---------------------------------------------------
+     AJAX FUNCTION FOR FETCH DATA  
+ ---------------------------------------------------
+ ***/
 
 
 

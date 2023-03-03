@@ -2,7 +2,7 @@
 require_once('../../../../../../wp-config.php');
 require_once('../../functions.php');
 
-$res = __getRowData('stock_overview','3');
+$res = __getRowData('stock_overview','8');
 
 $url = $res->content;
 $symbol = $res->symbol;
@@ -16,9 +16,9 @@ if($_POST['cahart_status']){
 }
 
 if($chart_status == 1){
-    echo __showChart($url,$symbol,$name,$chartType,002);
+    echo __showChart($url,$symbol,$name,$chartType,006);
 }else{
-    echo __showChart($url,$symbol,$name,$chartType,2);
+    echo __showChart($url,$symbol,$name,$chartType,6);
 }
 
 

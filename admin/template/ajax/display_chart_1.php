@@ -2,8 +2,11 @@
 require_once('../../../../../../wp-config.php');
 require_once('../../functions.php');
 
-$url = 'https://query1.finance.yahoo.com/v8/finance/chart/A?metrics=high?&interval=1d&range=24mo';
-$symbol = 'A';
+$res = __getRowData('stock_overview','2');
+
+$url = $res->content;
+$symbol = $res->symbol;
+$name = $res->name;
 $chartType = 'area';
 
 if($_POST['cahart_status']){
@@ -11,14 +14,10 @@ if($_POST['cahart_status']){
 }
 
 if($chart_status == 1){
-	echo __showChart($url,$symbol,$chartType,001);
+	echo __showChart($url,$symbol,$name,$chartType,001);
 }else{
-	echo __showChart($url,$symbol,$chartType,1);
+	echo __showChart($url,$symbol,$name,$chartType,1);
 }
-
-
-
-
 
 
  ?>
