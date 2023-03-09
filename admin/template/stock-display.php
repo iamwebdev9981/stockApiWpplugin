@@ -54,16 +54,16 @@
     <div class="collapse navbar-collapse " id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-          <a class="nav-link"  href="#">Home</a>
+          <a class="nav-link"  href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Symbol</a>
+          <a class="nav-link" href="#"></a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link" href="#">Chart</a>
+          <a class="nav-link" href="#"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" >Explore</a>
+          <a class="nav-link" href="#" ></a>
         </li>
       </ul>
       <div class="right-div">
@@ -98,43 +98,128 @@
       });
     </script>
 
+
+<div class="container">
+	<?php 
+
+  if(isset($_GET['chartType'])){
+  if(!$_GET['chartType'] == ''){ ?>
+
+  	 <div class="container p-2">
+ 	<div class="d-flex justify-content-between pt-3">
+ 		<div class="">
+ 			<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=area" id="area-chart-btn" class="btn-sm btn-success text-decoration-none">Area Chart</a>
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=line" id="line-chart-btn" class="btn-sm btn-primary text-decoration-none">Line Chart</a>
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=candlestick" id="candlestick-chart-btn" class="btn-sm btn-danger text-decoration-none">Candlestick Chart</a>
+ 		</div>
+ 		<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/" class="text-decoration-none btn-sm btn-secondary">Go Back</a>
+ 	</div>
+
+ 	<div class="" id="chart"></div>
+ </div>
+
+   <?php  $chart_type = $_GET['chartType'];
+   ?>
+   <script>
+   	   var chart_name = '<?php echo $chart_type; ?>';
+   	 $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_main_chart.php'; ?>",
+		      data:{cahart_status:1,chart_name:chart_name},
+		      success:function(f_resp_main)
+		      {
+           $("#chart").html(f_resp_main);
+		      }
+		    });
+   </script>
+
+   <?php
+
+  }else{
+  	?>
+      <div class="container m-5 p-5 text-center"><p class="display-4 mt-5 pt-5">Chart Name Not Found.</p>
+      	<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/" class="text-decoration-none btn-sm btn-secondary">Go Back</a>
+      </div>
+  	<?php
+  }
+
+
+   
+
+
+
+
+  /* else part of chart*/   
+  }else{
+
+	 ?>
+</div>
+
+
     <div class="container-fluid mb-2 mt-3 ">
-    	<div class="row">
-    		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
-    			<div class="nft-box ">
+    	<div class="row p-3">
+    		
+    		<div class="col-sm-12 col-lg-8 col-md-8 ">
+    			<div class="left-side-col">
+    			<div class="container pb-2">
+    			<div class="d-flex justify-content-center align-items-center">
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=area" id="area-chart-btn" class="btn-sm btn-success text-decoration-none mx-1">Area Chart</a>
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=line" id="line-chart-btn" class="btn-sm btn-primary text-decoration-none mx-1">Line Chart</a>
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=candlestick" id="candlestick-chart-btn" class="btn-sm btn-danger text-decoration-none mx-1">Candlestick Chart</a>
+    			</div>
+    		</div>
+
+
+    			<div class="chart-box">
+    				<div class="" id="dis-main-chart-1"></div>
+    				<div class="" id="dis-main-chart-1f"></div>
+    			</div>
+    		</div>
+    		</div>
+
+    	<div class="col-sm-12 col-lg-4 col-md-4 right-side-col">
+    	<div class="row row-1 mb-3 mt-3">
+    		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
+    			<div class="nft-box">
     				<span id="nifty_value1"></span>
     				<span id="nifty_value"></span>
     			</div>
     		</div>
-    		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
+    		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
     			<div class="nft-box ">
     				<span id="sensex_value1"></span>
     				<span id="sensex_value"></span>
     			</div>
     		</div>
-    		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
+    	</div>
+    	<div class="row row-2 mb-3">
+    		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
     			<div class="nft-box ">
     				<span id="banknifty_value1"></span>
     				<span id="banknifty_value"></span>
     			</div>
     		</div>
-    		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
+    		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
     			<div class="nft-box ">
     				<span id="nifty100_value1"></span>
     				<span id="nifty100_value"></span>
     			</div>
     		</div>
-    		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
+    	</div>	
+    	<div class="row row-3 mb-3">
+    		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
     			<div class="nft-box ">
     				<span id="niftyIT_value1"></span>
     				<span id="niftyIT_value"></span>
     			</div>
     		</div>
-    		<div class="col-sm-12 col-lg-2 col-md-2 text-center">
+    		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
     			<div class="nft-box ">
     				<span id="niftyPharma_value1"></span>
     				<span id="niftyPharma_value"></span>
     			</div>
+    		</div>
+    	</div>
     		</div>
     	</div>
     </div>
@@ -156,8 +241,8 @@
     		</div>
     		<div class="col-sm-12 col-lg-2 col-md-2">
     			<div class="chart-box">
-                    <div class="" id="dis-chart-3f"></div>
-                    <div class="" id="dis-chart-3"></div>
+              <div class="" id="dis-chart-3f"></div>
+              <div class="" id="dis-chart-3"></div>
     			</div>
     		</div>
     		<div class="col-sm-12 col-lg-2 col-md-2">
@@ -183,6 +268,43 @@
 
     <script>
     	$(document).ready(function(){
+
+
+    		 $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_main_chart.php'; ?>",
+		      data:{cahart_status:1},
+		      success:function(f_resp_main)
+		      {
+		       
+		          $("#dis-main-chart-1").html(f_resp_main);
+		          $("#dis-main-chart-1f").css({"display":"none"});
+		          $("#dis-main-chart-1").css({"display":"block"});
+		      }
+		    });
+
+
+        
+    setInterval(function()
+		{ 
+		    $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_main_chart.php'; ?>",
+		      datatype:"html",
+		      success:function(resp_main_chart)
+		      {
+		          //$("#dis-main-chart-").html(resp_main_chart);
+		          $("#dis-main-chart-1").html(resp_main_chart);
+		          $("#dis-main-chart-1").css({"display":"block"});
+		      }
+		    });
+		}, 1800000);//time in milliseconds 
+
+
+
+
+
+
      
       $.ajax({
 		      type:"post",
@@ -249,6 +371,8 @@
 		          $("#dis-chart-6f").css({"display":"none"});
 		      }
 		    });
+
+   
  
  
 		setInterval(function()
@@ -263,7 +387,7 @@
 		          $("#dis-chart-1f").css({"display":"none"});
 		      }
 		    });
-		}, 60000);//time in milliseconds 
+		}, 1800000);//time in milliseconds 
 
 
 		setInterval(function()
@@ -277,7 +401,7 @@
 		          $("#dis-chart-2").html(resp2);
 		      }
 		    });
-		}, 60000);//time in milliseconds 
+		}, 1800000);//time in milliseconds 
 
 		setInterval(function()
 		{ 
@@ -290,7 +414,7 @@
 		          $("#dis-chart-3").html(resp3);
 		      }
 		    });
-		}, 60000);//time in milliseconds 
+		},1800000);//time in milliseconds 
 
 		setInterval(function()
 		{ 
@@ -303,7 +427,7 @@
 		          $("#dis-chart-4").html(resp4);
 		      }
 		    });
-		}, 60000);//time in milliseconds 
+		}, 1800000);//time in milliseconds 
 
 
 		setInterval(function()
@@ -317,7 +441,7 @@
 		          $("#dis-chart-5").html(resp5);
 		      }
 		    });
-		}, 60000);//time in milliseconds 
+		}, 1800000);//time in milliseconds 
 
 		setInterval(function()
 		{ 
@@ -330,7 +454,12 @@
 		          $("#dis-chart-6").html(resp6);
 		      }
 		    });
-		}, 60000);//time in milliseconds 
+		}, 1800000);//time in milliseconds 
+
+
+
+
+
 
     	});
     </script>
@@ -338,15 +467,27 @@
 
 <div class="container-fluid">
 	<div class="row top-chart-row">
-		<div class="col-sm-12 col-lg-6 col-md-6 ">
-		  <div class=" ">
-		  	<h5 class="text-info mt-2">Nifty in INR</h5><hr>
+		<div class="container">
+      <div class="chart-box">
+    				<div class="" id="chart2"></div>
+    	</div>
+    	<script>
+    		 	$(document).ready(function(){
+           
+           var symbolName = '';
 
-	      <div class="" id="nfty-chart-1f"></div>
-    	  <div class="" id="nfty-chart-1"></div>
-	      </div>
-		</div>
-		<div class="col-sm-12 col-lg-6 col-md-6"></div>
+    		 $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_main_chart.php'; ?>",
+		      data:{cahart_status:1,symbolName:symbolName},
+		      success:function(f_resp_main)
+		      {  
+		          $("#chart2").html(f_resp_main);
+		      }
+		    });
+		});
+    	</script>
+   </div>
 	</div>
 </div>
 
@@ -569,6 +710,7 @@
 });
 </script>
 
+<?php } ?>
 	
 </body>
 </html>
