@@ -89,9 +89,7 @@
               search: searchTerm
             },
             success: function(searchData) {
-              $("#result2").html(searchData);
-              //alert(data);
-                
+                   $("#result2").html(searchData);             
             }
           });
         });
@@ -99,27 +97,84 @@
     </script>
 
 
-<div class="container">
-	<?php 
 
-  if(isset($_GET['chartType'])){
+
+
+<?php 
+
+ if(isset($_GET['chartType'])){	
+ if(isset($_GET['symbol'])){
+
+ 	/* Start code for Amazon chart */  
+
+ 	if(!$_GET['symbol'] == ''){ ?>
+
+<div class="container-fluid single-chart-main ">
+<div class="container mt-3 border bg-white">
+<div class="d-flex justify-content-between p-4">
+<div class="d-flex justify-content-center align-items-center ">
+	<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=area&symbol=AMZN" id="area-chart-btn" class="btn-sm btn-success text-decoration-none mx-1">Area Chart</a>
+	<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=line&symbol=AMZN" id="line-chart-btn" class="btn-sm btn-primary text-decoration-none mx-1">Line Chart</a>
+	<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=candlestick&symbol=AMZN" id="candlestick-chart-btn" class="btn-sm btn-danger text-decoration-none mx-1">Candlestick Chart</a>
+</div>
+<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/" class="text-decoration-none btn-sm btn-secondary">Go Back</a>
+</div>
+</div>
+<div class="container mt-2 p-0">
+	<div class=" w-100" id="chart3"></div>
+</div>
+	
+      <?php 
+       $chart_type = $_GET['chartType'];
+       $symbol_name = $_GET['symbol'];
+
+       ?>
+      <script>
+   	   var chart_name = '<?php echo $chart_type; ?>';
+   	   var symbol_name = '<?php echo $symbol_name; ?>';
+
+   	 $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_main_chart.php'; ?>",
+		      data:{cahart_status:1,chart_name:chart_name,symbol_name:symbol_name},
+		      success:function(f_resp_main)
+		      {
+           $("#chart3").html(f_resp_main);
+		      }
+		    });
+   </script>
+   </div>
+
+<?php	}else{ ?>
+
+   <div class="container-fluid single-chart-main d-flex justify-content-center align-items-center">
+ 		<div class="container  text-center">
+ 			<p class="display-4  text-center  text-white">Chart Name Not Found.</p>
+      	<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/" class="text-decoration-none btn-sm btn-light">Go Back</a>
+      </div>
+  </div>
+ <?php	} ?>
+
+ <?php }else{
   if(!$_GET['chartType'] == ''){ ?>
 
-  	 <div class="container p-2">
- 	<div class="d-flex justify-content-between pt-3">
+<div class="container-fluid bg-danger single-chart-main-1 p-5">
+  <div class="container shadow-sm border bg-white">
+ 	<div class="d-flex justify-content-between p-3 pt-4">
  		<div class="">
- 			<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=area" id="area-chart-btn" class="btn-sm btn-success text-decoration-none">Area Chart</a>
-    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=line" id="line-chart-btn" class="btn-sm btn-primary text-decoration-none">Line Chart</a>
-    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=candlestick" id="candlestick-chart-btn" class="btn-sm btn-danger text-decoration-none">Candlestick Chart</a>
+ 			<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=area" id="area-chart-btn" class="btn-sm btn-success text-decoration-none shadow-none">Area Chart</a>
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=line" id="line-chart-btn" class="btn-sm btn-primary text-decoration-none shadow-none">Line Chart</a>
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=candlestick" id="candlestick-chart-btn" class="btn-sm btn-danger text-decoration-none shadow-none">Candlestick Chart</a>
  		</div>
  		<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/" class="text-decoration-none btn-sm btn-secondary">Go Back</a>
  	</div>
-
- 	<div class="" id="chart"></div>
  </div>
 
-   <?php  $chart_type = $_GET['chartType'];
-   ?>
+  <div class="container p-0 mt-2 shadow-sm">
+ 	 <div class="" id="chart"></div>
+  </div>
+
+   <?php  $chart_type = $_GET['chartType']; ?>
    <script>
    	   var chart_name = '<?php echo $chart_type; ?>';
    	 $.ajax({
@@ -132,34 +187,29 @@
 		      }
 		    });
    </script>
-
+</div>
    <?php
-
+   
   }else{
   	?>
-      <div class="container m-5 p-5 text-center"><p class="display-4 mt-5 pt-5">Chart Name Not Found.</p>
-      	<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/" class="text-decoration-none btn-sm btn-secondary">Go Back</a>
+  	<div class="container-fluid bg-danger single-chart-main-1 p-5">
+      <div class="container m-5 p-5 text-center"><p class="display-4 mt-5 pt-5 text-white">Chart Name Not Found.</p>
+      	<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/" class="text-decoration-none btn-sm btn-light">Go Back</a>
       </div>
+    </div>
   	<?php
-  }
-
-
-   
-
-
-
+  }}
 
   /* else part of chart*/   
   }else{
 
 	 ?>
-</div>
 
-
-    <div class="container-fluid mb-2 mt-3 ">
+<div class="single-chart-main-1 pb-4" id="main-div-2" >
+   <div class="container-fluid mb-2 mt-3 ">
     	<div class="row p-3">
     		
-    		<div class="col-sm-12 col-lg-8 col-md-8 ">
+    		<div class="col-sm-12 col-lg-8 col-md-8 bg-white pt-3">
     			<div class="left-side-col">
     			<div class="container pb-2">
     			<div class="d-flex justify-content-center align-items-center">
@@ -177,16 +227,16 @@
     		</div>
     		</div>
 
-    	<div class="col-sm-12 col-lg-4 col-md-4 right-side-col">
+    	<div class="col-sm-12 col-lg-4 col-md-4 right-side-col bg-light pt-4">
     	<div class="row row-1 mb-3 mt-3">
     		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
-    			<div class="nft-box">
+    			<div class="nft-box bg-white">
     				<span id="nifty_value1"></span>
     				<span id="nifty_value"></span>
     			</div>
     		</div>
     		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
-    			<div class="nft-box ">
+    			<div class="nft-box bg-white">
     				<span id="sensex_value1"></span>
     				<span id="sensex_value"></span>
     			</div>
@@ -194,13 +244,13 @@
     	</div>
     	<div class="row row-2 mb-3">
     		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
-    			<div class="nft-box ">
+    			<div class="nft-box bg-white">
     				<span id="banknifty_value1"></span>
     				<span id="banknifty_value"></span>
     			</div>
     		</div>
     		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
-    			<div class="nft-box ">
+    			<div class="nft-box bg-white">
     				<span id="nifty100_value1"></span>
     				<span id="nifty100_value"></span>
     			</div>
@@ -208,13 +258,13 @@
     	</div>	
     	<div class="row row-3 mb-3">
     		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
-    			<div class="nft-box ">
+    			<div class="nft-box bg-white">
     				<span id="niftyIT_value1"></span>
     				<span id="niftyIT_value"></span>
     			</div>
     		</div>
     		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
-    			<div class="nft-box ">
+    			<div class="nft-box bg-white">
     				<span id="niftyPharma_value1"></span>
     				<span id="niftyPharma_value"></span>
     			</div>
@@ -224,9 +274,39 @@
     	</div>
     </div>
 
-<!--  -->
+<div class="container-fluid ">
+	<div class="row top-chart-row bg-white">
+		<div class="d-flex justify-content-center align-items-center mt-3">
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=area&symbol=AMZN" id="area-chart-btn" class="btn-sm btn-success text-decoration-none mx-1">Area Chart</a>
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=line&symbol=AMZN" id="line-chart-btn" class="btn-sm btn-primary text-decoration-none mx-1">Line Chart</a>
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=candlestick&symbol=AMZN" id="candlestick-chart-btn" class="btn-sm btn-danger text-decoration-none mx-1">Candlestick Chart</a>
+    			</div>
+		
+      <div class="chart-box">
+    				<div class="" id="chart2"></div>
+    	</div>
+    	<script>
+    		 	$(document).ready(function(){
+           
+           var symbolName = '';
+
+    		 $.ajax({
+		      type:"post",
+		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_main_chart.php'; ?>",
+		      data:{cahart_status:1,symbolName:symbolName},
+		      success:function(f_resp_main)
+		      {  
+		          $("#chart2").html(f_resp_main);
+		      }
+		    });
+		});
+    	</script>
+   
+	</div>
+</div>
+
     <div class="container-fluid pt-2">
-    	<div class="row top-chart-row">
+    	<div class="row top-chart-row bg-white">
     		<div class="col-sm-12 col-lg-2 col-md-2">
     			<div class="chart-box">
     				<div class="" id="dis-chart-1f"></div>
@@ -464,33 +544,6 @@
     	});
     </script>
 
-
-<div class="container-fluid">
-	<div class="row top-chart-row">
-		<div class="container">
-      <div class="chart-box">
-    				<div class="" id="chart2"></div>
-    	</div>
-    	<script>
-    		 	$(document).ready(function(){
-           
-           var symbolName = '';
-
-    		 $.ajax({
-		      type:"post",
-		      url:"<?php echo STX_FULL_PLUGIN_URL.'admin/template/ajax/display_main_chart.php'; ?>",
-		      data:{cahart_status:1,symbolName:symbolName},
-		      success:function(f_resp_main)
-		      {  
-		          $("#chart2").html(f_resp_main);
-		      }
-		    });
-		});
-    	</script>
-   </div>
-	</div>
-</div>
-
 <script>
 	$(document).ready(function(){
      
@@ -709,7 +762,7 @@
      
 });
 </script>
-
+</div>
 <?php } ?>
 	
 </body>

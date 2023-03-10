@@ -118,7 +118,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(
 }
 
 .nft-box span:nth-child(1){
-	color: darkblue;
+	color: purple;
 	font-weight: 600!important;
 }
 
@@ -141,4 +141,20 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(
 }
 
 
+.btn-sm{
+	box-shadow: none!important;
+}
 
+.single-chart-main{
+background-image: linear-gradient(to right, #00b4db, #0083b0);
+min-height: 91.5vh!important;
+display: flex;
+flex-direction: column;
+}
+
+.single-chart-main-1{
+	background-image: radial-gradient( circle 759px at -6.7% 50%, rgba(80,131,73,1) 0%, rgba(140,209,131,1) 26.2%, rgba(178,231,170,1) 50.6%, rgba(144,213,135,1) 74.1%, rgba(75,118,69,1) 100.3% );
+	min-height: 91.5vh!important;
+	padding: 0px!important;
+	margin: 0px!important;
+}
