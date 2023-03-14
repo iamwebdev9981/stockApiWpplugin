@@ -23,7 +23,7 @@ if(isset($_POST['chart_name'])){
    __showChart($url,$symbol_name,$name,$chartT,33333);
 }else{
       $chartT = $_POST['chart_name']; 
-        __showChart($url,$symbol,$name,$chartT,3333);
+   __showChart($url,$symbol,$name,$chartT,3333);
 }
 
 

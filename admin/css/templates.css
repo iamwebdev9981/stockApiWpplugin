@@ -158,3 +158,8 @@ flex-direction: column;
 	padding: 0px!important;
 	margin: 0px!important;
 }
+
+
+.details-container .top-div h5 strong{
+	 color:indigo;
+}

@@ -102,8 +102,80 @@
 
 <?php 
 
- if(isset($_GET['chartType'])){	
- if(isset($_GET['symbol'])){
+ if(isset($_GET['chartType'])){
+ 	if($_GET['chartType'] == 'details'){ /********** start details page *********/
+ 		$symbol_name = $_GET['symbol'];
+
+   // Define API URL
+$url = 'https://query1.finance.yahoo.com/v8/finance/chart/'.$symbol_name.'?metrics=high,low,open,close,volume,change,percentchange&interval=1d&range=24mo';
+
+// Initialize cURL
+$curl = curl_init();
+
+// Set cURL options
+curl_setopt($curl, CURLOPT_URL, $url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+// Execute cURL request
+$response = curl_exec($curl);
+
+// Close cURL
+curl_close($curl);
+
+// Decode JSON response
+$data = json_decode($response, true);
+
+// Print chart information
+$Symbol         = $data['chart']['result'][0]['meta']['symbol'];
+$Currency       = $data['chart']['result'][0]['meta']['currency'];
+$Previous_Close = $data['chart']['result'][0]['meta']['chartPreviousClose'];
+$Current_Price  = $data['chart']['result'][0]['meta']['regularMarketPrice'];
+
+ 	?>
+
+ 		<div class="container p-3 details-container">
+ 			<div class=" d-flex justify-content-around align-items-center border p-3 top-div shadow-sm">
+ 				<h5 class="">
+ 					<strong class="">Symbol : </strong><span><?php if(isset($Symbol)){ echo $Symbol;} ?></span></h5>
+ 				<h5 class="">
+ 					<strong class="">Currency : </strong><span><?php if(isset($Currency)){ echo $Currency;} ?></span></h5>
+ 				<h5 class="">
+ 					<strong class="">Previous Close : </strong><span><?php if(isset($Previous_Close)){ echo $Previous_Close;} ?></span></h5>
+ 				<h5 class="">
+ 					<strong class="">Current Price : </strong><span><?php if(isset($Current_Price)){ echo $Current_Price;} ?></span></h5>
+ 			</div>
+
+ 			<div class="mt-5 shadow-sm">
+ 				<table class="table table-bordered z">
+ 				  <thead class="">
+ 					  <tr>
+ 					  	<th>Date</th>
+ 					  	<th class=" text-success">High</th>
+ 					  	<th class=" text-danger">Low</th>
+ 					  	<th class=" text-primary">Open</th>
+ 					  	<th class=" text-warning">Close</th>
+ 					  	<th class=" text-info">Volume</th>
+ 					  </tr>
+ 					</thead>
+ 					<tbody>
+ 						<?php foreach ($data['chart']['result'][0]['timestamp'] as $key => $timestamp) { ?>
+ 						<tr>
+ 							<td><?php echo date('Y-m-d', $timestamp); ?></td>
+ 							<td  class="text-success"><?php echo $data['chart']['result'][0]['indicators']['quote'][0]['high'][$key]; ?></td>
+ 							<td  class="text-danger"><?php echo $data['chart']['result'][0]['indicators']['quote'][0]['low'][$key]; ?></td>
+ 							<td  class="text-primary"><?php echo $data['chart']['result'][0]['indicators']['quote'][0]['open'][$key]; ?></td>
+ 							<td  class="text-warning"><?php echo $data['chart']['result'][0]['indicators']['quote'][0]['close'][$key]; ?></td>
+ 							<td  class="text-info"><?php echo $data['chart']['result'][0]['indicators']['quote'][0]['volume'][$key]; ?></td>
+ 						</td>
+ 						</tr>
+ 					<?php } ?>
+ 					</tbody> 
+ 				</table>
+ 			</div>
+ 		</div>
+
+<?php 	}/******** End Details Page************/
+ elseif(isset($_GET['symbol'])){
 
  	/* Start code for Amazon chart */  
 
@@ -216,6 +288,7 @@
     				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=area" id="area-chart-btn" class="btn-sm btn-success text-decoration-none mx-1">Area Chart</a>
     				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=line" id="line-chart-btn" class="btn-sm btn-primary text-decoration-none mx-1">Line Chart</a>
     				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=candlestick" id="candlestick-chart-btn" class="btn-sm btn-danger text-decoration-none mx-1">Candlestick Chart</a>
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=details&symbol=AAPL" id="chart-detail-btn" class="btn-sm btn-info text-white text-decoration-none mx-1">Details</a>
     			</div>
     		</div>
 
@@ -227,7 +300,7 @@
     		</div>
     		</div>
 
-    	<div class="col-sm-12 col-lg-4 col-md-4 right-side-col bg-light pt-4">
+    	<div class="col-sm-12 col-lg-4 col-md-4 right-side-col bg-light pt-4 ">
     	<div class="row row-1 mb-3 mt-3">
     		<div class="col-sm-6 col-lg-6 col-md-6 text-center">
     			<div class="nft-box bg-white">
@@ -280,6 +353,7 @@
     				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=area&symbol=AMZN" id="area-chart-btn" class="btn-sm btn-success text-decoration-none mx-1">Area Chart</a>
     				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=line&symbol=AMZN" id="line-chart-btn" class="btn-sm btn-primary text-decoration-none mx-1">Line Chart</a>
     				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=candlestick&symbol=AMZN" id="candlestick-chart-btn" class="btn-sm btn-danger text-decoration-none mx-1">Candlestick Chart</a>
+    				<a href="<?php echo site_url(); ?>/<?php echo basename(get_permalink()); ?>/?chartType=details&symbol=AMZN" id="details-chart-btn" class="btn-sm btn-info text-white text-decoration-none mx-1">Details</a>
     			</div>
 		
       <div class="chart-box">
@@ -362,9 +436,7 @@
 		          $("#dis-main-chart-1").css({"display":"block"});
 		      }
 		    });
-
-
-        
+    
     setInterval(function()
 		{ 
 		    $.ajax({
@@ -379,12 +451,6 @@
 		      }
 		    });
 		}, 1800000);//time in milliseconds 
-
-
-
-
-
-
      
       $.ajax({
 		      type:"post",
@@ -467,7 +533,7 @@
 		          $("#dis-chart-1f").css({"display":"none"});
 		      }
 		    });
-		}, 1800000);//time in milliseconds 
+		}, 60000);//time in milliseconds 
 
 
 		setInterval(function()
@@ -481,7 +547,7 @@
 		          $("#dis-chart-2").html(resp2);
 		      }
 		    });
-		}, 1800000);//time in milliseconds 
+		}, 180000);//time in milliseconds 
 
 		setInterval(function()
 		{ 
@@ -494,7 +560,7 @@
 		          $("#dis-chart-3").html(resp3);
 		      }
 		    });
-		},1800000);//time in milliseconds 
+		},90000);//time in milliseconds 
 
 		setInterval(function()
 		{ 
@@ -507,7 +573,7 @@
 		          $("#dis-chart-4").html(resp4);
 		      }
 		    });
-		}, 1800000);//time in milliseconds 
+		}, 120000);//time in milliseconds 
 
 
 		setInterval(function()
@@ -521,7 +587,7 @@
 		          $("#dis-chart-5").html(resp5);
 		      }
 		    });
-		}, 1800000);//time in milliseconds 
+		}, 140000);//time in milliseconds 
 
 		setInterval(function()
 		{ 
@@ -534,7 +600,7 @@
 		          $("#dis-chart-6").html(resp6);
 		      }
 		    });
-		}, 1800000);//time in milliseconds 
+		}, 180000);//time in milliseconds 
 
 
 
@@ -767,6 +833,11 @@
 	
 </body>
 </html>
+
+
+<?php
+
+
 
 
 
